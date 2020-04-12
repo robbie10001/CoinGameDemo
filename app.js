@@ -18,27 +18,36 @@ function isTouching(a, b) {
 
 const avatar = document.querySelector('#player')
 const coin = document.querySelector('#coin')
+let counter = 0
 //we create an event listener that picks up when we let go of a given button. 
 window.addEventListener('keyup', function(e) {
 	if(e.key === 'ArrowDown' || e.key === 'Down') {
 	const currentTop = extractPosition(avatar.style.top)
-	avatar.style.top = `${currentTop + 50}px`;
+	avatar.style.top = `${currentTop + 100}px`;
 	} 
 	else if (e.key === 'ArrowUp' || e.key === 'Up') {
 	const currentBottom = extractPosition(avatar.style.top)
-	avatar.style.top = `${currentBottom - 50}px`;
+	avatar.style.top = `${currentBottom - 100}px`;
 	} 
 	else if (e.key === 'ArrowRight' || e.key === 'Right') {
 	const currentLeft = extractPosition(avatar.style.left)
-	avatar.style.left = `${currentLeft + 50}px`;
+	avatar.style.left = `${currentLeft + 100}px`;
 	avatar.style.transform = 'scale(1,1)';
 	} 
 	else if (e.key === 'ArrowLeft' || e.key === 'Left') {
 	const currentRight = extractPosition(avatar.style.left)
-	avatar.style.left = `${currentRight - 50}px`;
+	avatar.style.left = `${currentRight - 100}px`;
 	avatar.style.transform = 'scale(-1,1)';
 	}
-	if(isTouching(avatar, coin)) moveCoin();
+	if(isTouching(avatar, coin)) {
+	moveCoin();
+	counter += 1 
+	console.log(counter)
+	let earnings = counter * 10769.95
+	let answer = Math.round(earnings)
+	document.getElementById('output').innerHTML = "WOW! G-MONEY HAS MADE: $" + answer + " DOLLARS";
+
+	} 
 });
 const extractPosition = (pos) => {
 	if (!pos) return 100; 
